@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Star Wars | Collection Details{% endblock %}
+
+{% block content %}
+    <div class="container" style="padding-bottom: 50px;">
+        <p><a href="{% url 'app:collections' %}"><- To all collections</a></p>
+        <h2>{{ filename }}</h2>
+
+        <div>
+            <input type="checkbox" class="btn-check selectable" value="birth_year" id="birth_year" autocomplete="off">
+            <label class="btn btn-outline-primary" for="birth_year">birth_year</label>
+
+            <input type="checkbox" class="btn-check selectable" value="homeworld" id="homeworld" autocomplete="off">
+            <label class="btn btn-outline-primary" for="homeworld">homeworld</label>
+
+            <input type="checkbox" class="btn-check selectable" value="name" id="name" autocomplete="off">
+            <label class="btn btn-outline-primary" for="name">name</label>
+        </div>
+        <div id="content1">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        {% for column in header %}
+                             <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    {% for row in data %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if not data.has_next %}
+            <div id="no-more-data" style="display:none;"></div>
+        {% endif %}
+
+        <input type="hidden" id="collection-id" value="{{ collection.id }}">
+        <button class="btn btn-outline-success" id="show-more" onclick="showMore()">Show more</button>
+    </div>
+
+    <script src="{% static 'js/starwars.js' %}"></script>
+
+{% endblock %}

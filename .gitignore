@@ -1,0 +1,7 @@
+.idea/
+.venv/
+__pycache__/
+app.db
+dump.csv
+media/
+starwars.db

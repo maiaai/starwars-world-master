@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <h3>Collections</h3>
+
+    <form method="post" >
+        {% csrf_token %}
+        <input type="submit" value="Fetch" name="fetch">
+    </form>
+
+    {% for col in collections %}
+        <a href="{% url 'app:details' col.pk %}">{{ col.collected_at }}</a><br>
+    {% endfor %}
+
+{% endblock %}
